@@ -11,7 +11,8 @@ export function reducer(state: GameState, action: Action): GameState {
       state = {
         board: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         player: player.one,
-        gameOver: false
+        gameOver: false,
+        move: 0
       };
       render.newGame(state.board, state.player);
       return state;
@@ -25,6 +26,7 @@ export function reducer(state: GameState, action: Action): GameState {
       }
       // success
       state.board[position] = state.player;
+      state.move++;
       // fall through to NEXT_PLAYER
 
     case "NEXT_PLAYER":

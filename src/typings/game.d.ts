@@ -2,6 +2,7 @@ interface GameState {
   player: string;
   board: any[];
   gameOver: boolean;
+  move: number;
 }
 
 interface Action {

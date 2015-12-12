@@ -29,7 +29,8 @@ function playAgain() {
 }
 
 function promptUser() {
-  if (store.getState().gameOver) {
+  const state = store.getState();
+  if (state.gameOver || state.move > 8) {
     playAgain();
   } else {
     prompt.start();
