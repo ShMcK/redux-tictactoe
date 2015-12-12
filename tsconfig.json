@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "preserveConstEnums": true,
+    "outDir": "./dist",
+    "sourceMap": false
+  },
+  "filesGlob": [
+    "src/**/*.ts"
+  ],
+  "files": [
+    "src/index.ts",
+    "src/model/actions.ts",
+    "src/model/reducer.ts",
+    "src/model/store.ts",
+    "src/model/win.ts",
+    "src/typings/game.d.ts",
+    "src/typings/redux.d.ts",
+    "src/view/game.ts",
+    "src/view/render.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}
