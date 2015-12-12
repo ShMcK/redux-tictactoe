@@ -24,7 +24,7 @@ export function reducer(state: GameState, action: Action): GameState {
         return state;
       }
       // position is open
-      if (!validPosition.test(position.toString())) {
+      if (state.board[position] !== position + 1) {
         render.error.taken(position);
         return state;
       }

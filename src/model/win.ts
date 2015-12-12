@@ -10,7 +10,7 @@ export function hasWon(player: string, board: any[]): boolean {
     if (item === player) { allPlayerMoves.push(index + 1); }
   });
   if (allPlayerMoves.length < 3) { return false; } // early optimization. can't possibly win
-  return possibleWins.some((win: number[]) => {
+  return possibleWins.some((win: number[]) => { // meets winning condition ?
     return win.every((val: number) => {
       return allPlayerMoves.indexOf(val) > -1;
     });

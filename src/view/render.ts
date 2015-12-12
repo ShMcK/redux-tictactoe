@@ -9,7 +9,7 @@ const render = {
       render.board(board);
   },
   player: (player: string) => {
-    console.log(`
+    console.info(`
       * Player ${player}, your turn! *
    `);
   },
@@ -27,21 +27,21 @@ const render = {
       `);
   },
   win: (player: string) => {
-    console.log(`
-        ********************************
+    console.info(`
+        ******************
         * Player ${player} wins! *
-        ********************************
+        ******************
         `);
   },
   gameOver: () => {
-    console.log("Thanks for playing");
+    console.log("Game over. Thanks for playing");
   },
   error: {
     taken: (position: number) => {
-      console.log(`Sorry, square ${position} is already taken. Try again.`);
+      console.warn(`Sorry, square ${position} is already taken. Try again.`);
     },
     invalid: (input: string) => {
-      console.log(`${input} is not a valid choice`);
+      console.warn(`${input} is not a valid choice`);
     }
   }
 };
