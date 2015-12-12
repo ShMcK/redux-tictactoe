@@ -1,3 +1,4 @@
+"use strict";
 import { store } from "../model/store";
 import * as Action from "../model/actions";
 const prompt = require("prompt");

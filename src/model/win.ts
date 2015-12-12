@@ -1,3 +1,4 @@
+"use strict";
 const possibleWins = [
   [1, 2, 3], [4, 5, 6], [7, 8, 9], // horizontal
   [1, 4, 7], [2, 5, 8], [3, 6, 9], // vertical
@@ -9,9 +10,11 @@ export function hasWon(player: string, board: any[]): boolean {
   board.forEach((item: any, index: number) => {
     if (item === player) { allPlayerMoves.push(index + 1); }
   });
-  if (allPlayerMoves.length < 3) { return false; } // early optimization. can't possibly win
-  return possibleWins.some((win: number[]) => { // meets winning condition ?
-    return win.every((val: number) => {
+  // early optimization. can't possibly win
+  if (allPlayerMoves.length < 3) { return false; }
+  // meets winning condition
+  return possibleWins.some((win: number[]): boolean => {
+    return win.every((val: number): boolean => {
       return allPlayerMoves.indexOf(val) > -1;
     });
   });

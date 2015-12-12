@@ -1,3 +1,4 @@
+"use strict";
 import render from "../view/render";
 import { hasWon } from "./win";
 import { player } from "../view/game";

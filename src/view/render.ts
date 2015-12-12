@@ -1,3 +1,4 @@
+"use strict";
 import { player as Player} from "./game";
 const colors = require("colors/safe");
 
