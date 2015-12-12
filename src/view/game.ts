@@ -5,10 +5,21 @@ const prompt = require("prompt");
 
 const willContinue = /^(Y|YES)$/i;
 
+export const player = {
+  one: "✗",
+  two: "○"
+};
+
 function playAgain() {
-  console.log("Press 'Y'");
   prompt.start();
-  prompt.get(["playAgain"], function(err, result) {
+  var property = {
+    name: "playAgain",
+    message: "Play again? (y or n)",
+    validator: /y[es]*|n[o]?/,
+    warning: "Must respond yes or no",
+    default: "y"
+  };
+  prompt.get(property, function(err, result) {
     if (err) { render.error.invalid(err); }
     if (willContinue.test(result.playAgain)) {
       startGame();
@@ -24,7 +35,13 @@ function promptUser() {
     playAgain();
   } else {
     prompt.start();
-    prompt.get(["position"], function(err, result) {
+    var property = {
+      name: "position",
+      message: "Choose a square",
+      validator: /^[1-9]$/,
+      warning: "Must be a number from 1-9"
+    };
+    prompt.get(property, function(err, result) {
       if (err) { render.error.invalid(err); }
       store.dispatch(Action.choosePosition(result.position));
       promptUser();

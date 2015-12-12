@@ -1,6 +1,6 @@
 import render from "../view/render";
 import { hasWon } from "./win";
-import { player } from "../index";
+import { player } from "../view/game";
 
 // validations
 const validPosition = /^[0-8]$/; // (1-9) - 1
@@ -18,17 +18,11 @@ export function reducer(state: GameState, action: Action): GameState {
 
     case "CHOOSE_POSITION":
       const position: number = action.payload.position - 1;
-      // valid input
-      if (!validPosition.test(position.toString())) {
-        render.error.invalid(action.payload.position);
-        return state;
-      }
       // position is open
       if (state.board[position] !== position + 1) {
         render.error.taken(position);
         return state;
       }
-
       // success
       state.board[position] = state.player;
       // fall through to NEXT_PLAYER
