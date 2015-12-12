@@ -1,4 +1,4 @@
-import { player} from "./game";
+import { player as Player} from "./game";
 const colors = require("colors/safe");
 
 colors.setTheme({
@@ -8,19 +8,20 @@ colors.setTheme({
   error: "red"
 });
 
-function square(board, index) {
+function square(board, player, index) {
   const position = board[index];
   if (typeof position === "number") {
-    return colors.prompt(position);
+    return colors.prompt(position); // open square
   } else {
-    return colors.warn(position);
+    return position == Player.one ?
+    colors.error(position) : colors.warn(position); // ✗, ○
   }
 }
 
-function row(board, start: number) {
-  return square(board, start) + "  |  " +
-    square(board, start + 1) + "  |  " +
-    square(board, start + 2);
+function row(board, player, start: number) {
+  return square(board, player, start) + "  |  " +
+    square(board, player, start + 1) + "  |  " +
+    square(board, player, start + 2);
 }
 
 const render = {
@@ -38,13 +39,13 @@ const render = {
     }
     console.log(`
                 |     |
-             ${row(board, 0) }
+             ${row(board, player, 0)}
            _____|_____|_____
                 |     |
-             ${row(board, 3) }
+             ${row(board, player, 3)}
            _____|_____|_____
                 |     |
-             ${row(board, 6) }
+             ${row(board, player, 6)}
                 |     |
       `);
   },
