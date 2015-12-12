@@ -3,6 +3,7 @@ const START_GAME = "START_GAME";
 const CHOOSE_POSITION = "CHOOSE_POSITION";
 const NEXT_PLAYER = "NEXT_PLAYER";
 const WIN_GAME = "WIN_GAME";
+const GAME_OVER = "GAME_OVER";
 
 /** Action Creators */
 export function startGame(): Action {
@@ -16,4 +17,7 @@ export function nextPlayer(): Action {
 }
 export function winGame(): Action {
   return { type: WIN_GAME };
+}
+export function gameOver(): Action {
+  return { type: GAME_OVER };
 }

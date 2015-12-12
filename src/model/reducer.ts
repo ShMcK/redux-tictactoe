@@ -14,6 +14,10 @@ export function reducer(state: GameState, action: Action): GameState {
       render.newGame(state.board, state.player);
       return state;
 
+    case "GAME_OVER":
+      render.gameOver();
+      return state;
+
     case "CHOOSE_POSITION":
       const position: number = action.payload.position - 1;
       // position is open
