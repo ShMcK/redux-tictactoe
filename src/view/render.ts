@@ -1,47 +1,67 @@
+import { player} from "./game";
+const colors = require("colors/safe");
+
+colors.setTheme({
+  prompt: "grey",
+  info: "green",
+  warn: "yellow",
+  error: "red"
+});
+
+function square(board, index) {
+  const position = board[index];
+  if (typeof position === "number") {
+    return colors.prompt(position);
+  } else {
+    return colors.warn(position);
+  }
+}
+
+function row(board, start: number) {
+  return square(board, start) + "  |  " +
+    square(board, start + 1) + "  |  " +
+    square(board, start + 2);
+}
+
 const render = {
   newGame: (board, player) => {
-    console.log(`
-      *************************
-      *      TIC TAC TOE      *
-      *************************
-      `);
-      render.player(player);
-      render.board(board);
+    console.log(colors.info(`
+             TIC TAC TOE
+   `));
+    render.board(board, player);
   },
-  player: (player: string) => {
-    console.info(`
-      * Player ${player}, your turn! *
-   `);
-  },
-  board: (b: any[]): void => {
+  board: (board: any[], player): void => {
+    if (player) {
+      console.log(colors.info(`
+          Player ${player}, your turn!
+      `));
+    }
     console.log(`
                 |     |
-             ${b[0]}  |  ${b[1]}  |  ${b[2]}
+             ${row(board, 0) }
            _____|_____|_____
                 |     |
-             ${b[3]}  |  ${b[4]}  |  ${b[5]}
+             ${row(board, 3) }
            _____|_____|_____
                 |     |
-             ${b[6]}  |  ${b[7]}  |  ${b[8]}
+             ${row(board, 6) }
                 |     |
       `);
   },
   win: (player: string) => {
-    console.info(`
-        ******************
-        * Player ${player} wins! *
-        ******************
-        `);
+    console.log(colors.info(`
+             Player ${player} wins!
+`));
   },
   gameOver: () => {
     console.log("Game over. Thanks for playing");
   },
   error: {
     taken: (position: number) => {
-      console.warn(`Sorry, square ${position} is already taken. Try again.`);
+      console.log(colors.warn(`Sorry, square ${position} is already taken. Try again.`));
     },
     invalid: (input: string) => {
-      console.warn(`${input} is not a valid choice`);
+      console.log(colors.warn(`${input} is not a valid choice`));
     }
   }
 };

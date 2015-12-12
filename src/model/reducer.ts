@@ -30,14 +30,13 @@ export function reducer(state: GameState, action: Action): GameState {
     case "NEXT_PLAYER":
       if (!hasWon(state.player, state.board)) {
         state.player = state.player === player.one ? player.two : player.one;
-        render.player(state.player);
-        render.board(state.board);
+        render.board(state.board, state.player);
         return state;
       }
     // fall through to WIN_GAME
 
     case "WIN_GAME":
-      render.board(state.board);
+      render.board(state.board, false);
       render.win(state.player);
       state.gameOver = true;
     // fall through to default

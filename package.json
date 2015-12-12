@@ -9,6 +9,7 @@
   "author": "Shawn McKay <shawn.j.mckay@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "colors": "1.1.2",
     "prompt": "0.2.14",
     "redux": "3.0.4"
   }

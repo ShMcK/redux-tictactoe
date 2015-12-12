@@ -3,8 +3,6 @@ import * as Action from "../model/actions";
 import render from "./render";
 const prompt = require("prompt");
 
-const willContinue = /^(Y|YES)$/i;
-
 export const player = {
   one: "✗",
   two: "○"
@@ -15,13 +13,13 @@ function playAgain() {
   var property = {
     name: "playAgain",
     message: "Play again? (y or n)",
-    validator: /y[es]*|n[o]?/,
+    validator: /y[es]*|n[o]?/i,
     warning: "Must respond yes or no",
     default: "y"
   };
   prompt.get(property, function(err, result) {
     if (err) { render.error.invalid(err); }
-    if (willContinue.test(result.playAgain)) {
+    if ((/^y[es]?$/i).test(result.playAgain)) {
       startGame();
     } else {
       render.gameOver();
