@@ -2,9 +2,6 @@ import render from "../view/render";
 import { hasWon } from "./win";
 import { player } from "../view/game";
 
-// validations
-const validPosition = /^[0-8]$/; // (1-9) - 1
-
 export function reducer(state: GameState, action: Action): GameState {
   switch (action.type) {
     case "START_GAME":
