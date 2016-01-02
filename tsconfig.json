@@ -11,6 +11,7 @@
   "files": [
     "src/index.ts",
     "src/model/actions.ts",
+    "src/model/ai.ts",
     "src/model/reducer.ts",
     "src/model/store.ts",
     "src/model/win.ts",

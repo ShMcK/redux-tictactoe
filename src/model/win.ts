@@ -6,13 +6,15 @@ const possibleWins = [
 ];
 
 export function hasWon(player: string, board: any[]): boolean {
-  let allPlayerMoves = [];  // collect player moves
+  // collect player moves
+  let allPlayerMoves = [];
   board.forEach((item: any, index: number) => {
     if (item === player) { allPlayerMoves.push(index + 1); }
   });
-  // early optimization. can't possibly win
+  // early optimization.
+  // not enough moves. can't possibly win
   if (allPlayerMoves.length < 3) { return false; }
-  // meets winning condition
+  // player moves match a win
   return possibleWins.some((win: number[]): boolean => {
     return win.every((val: number): boolean => {
       return allPlayerMoves.indexOf(val) > -1;

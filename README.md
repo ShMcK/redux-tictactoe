@@ -4,10 +4,8 @@ TicTacToe in the terminal.
 
 ### Setup
 
-
     npm i
     npm i -g tsc
-
 
 ### Run
 

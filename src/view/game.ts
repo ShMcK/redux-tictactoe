@@ -1,23 +1,30 @@
 "use strict";
 import { store } from "../model/store";
 import * as Action from "../model/actions";
+import { getAnyMove, getBestMove } from "../model/ai";
 const prompt = require("prompt");
 
 export const player = {
   one: "✗",
-  two: "○"
+  two: "○",
+  computerOpponent: true,
+  difficulty: "easy"
 };
 
 export default function startGame() {
+  // reset game data
   store.dispatch(Action.startGame());
+  // prompt player 1 to move
   promptUser();
 }
 
 function promptUser() {
   const state = store.getState();
+  // game finished? play again?
   if (state.gameOver || state.move > 8) {
     playAgain();
   } else {
+    // player move
     prompt.start();
     var property = {
       name: "position",
@@ -27,7 +34,14 @@ function promptUser() {
     };
     prompt.get(property, function(err, result) {
       store.dispatch(Action.choosePosition(result.position));
-      promptUser();
+
+      if (player.computerOpponent && state.player === player.two) {
+        // computer player turn is next
+        computerOpponentMove();
+      } else {
+        // human turn is next
+        promptUser();
+      }
     });
   }
 }
@@ -43,10 +57,23 @@ function playAgain() {
   };
   prompt.get(property, function(err, result) {
     if ((/^y[es]?$/i).test(result.playAgain)) {
+      // play again? yes
       startGame();
     } else {
+      // play again? no
       store.dispatch(Action.gameOver());
       return;
     }
   });
+}
+
+
+function computerOpponentMove() {
+  let selectedPosition = null;
+  if (player.difficulty === "easy") {
+    selectedPosition = getAnyMove();
+  } else if (player.difficulty === "hard") {
+    selectedPosition = getBestMove();
+  }
+  store.dispatch(Action.choosePosition(selectedPosition));
 }

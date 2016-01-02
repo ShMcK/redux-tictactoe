@@ -9,6 +9,7 @@ colors.setTheme({
   error: "red"
 });
 
+// styling a single square
 function square(board, player, index) {
   const position = board[index];
   if (typeof position === "number") {
@@ -19,6 +20,7 @@ function square(board, player, index) {
   }
 }
 
+// styling a row
 function row(board, player, start: number) {
   return square(board, player, start) + "  |  " +
     square(board, player, start + 1) + "  |  " +
