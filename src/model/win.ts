@@ -19,7 +19,7 @@ export function hasWon(player: string, board: any[]): boolean {
   });
   // early optimization.
   // not enough moves. can't possibly win
-  if (allPlayerMoves.length < 5) { return false; }
+  if (allPlayerMoves.length < 3) { return false; }
 
   let possibleWins = board.length > 9 ? possible4x4Wins : possible3x3Wins;
 

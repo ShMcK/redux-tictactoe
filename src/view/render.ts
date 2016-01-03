@@ -16,15 +16,23 @@ function square(board, player, index) {
     return colors.prompt(position); // open square
   } else {
     return position == Settings.playerOne ?
-    colors.error(position) : colors.warn(position); // ✗, ○
+      colors.error(position) : colors.warn(position); // ✗, ○
   }
 }
 
 // styling a row
 function row(board, player, start: number) {
-  return square(board, player, start) + "  |  " +
-    square(board, player, start + 1) + "  |  " +
+  let line = square(board, player, start) + adjust(start) +
+    square(board, player, start + 1) + adjust(start + 1) +
     square(board, player, start + 2);
+  if (board.length > 9) {
+    line += adjust(start + 2) + square(board, player, start + 3);
+  }
+  return line;
+}
+
+function adjust(n: number): string {
+  return n <= 8 ? "  |  " : " |  ";
 }
 
 const render = {
@@ -40,17 +48,34 @@ const render = {
           Player ${player}, your turn!
       `));
     }
-    console.log(`
-                |     |
-             ${row(board, player, 0)}
-           _____|_____|_____
-                |     |
-             ${row(board, player, 3)}
-           _____|_____|_____
-                |     |
-             ${row(board, player, 6)}
-                |     |
-      `);
+    if (board.length > 9) {
+      console.log(`
+                  |     |     |
+               ${row(board, player, 0) }
+             _____|_____|_____|_____
+                  |     |     |
+               ${row(board, player, 4) }
+             _____|_____|_____|_____
+                  |     |     |
+               ${row(board, player, 8) }
+             _____|_____|_____|_____
+                  |     |     |
+               ${row(board, player, 12) }
+                  |     |     |
+        `);
+    } else {
+      console.log(`
+                  |     |
+               ${row(board, player, 0) }
+             _____|_____|_____
+                  |     |
+               ${row(board, player, 3) }
+             _____|_____|_____
+                  |     |
+               ${row(board, player, 6) }
+                  |     |
+        `);
+    }
   },
   win: (player: string) => {
     console.log(colors.info(`

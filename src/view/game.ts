@@ -13,6 +13,9 @@ export function startGame() {
   // store.dispatch(Action.startGame());
 }
 
+
+// TODO: validator for 3x3 or 4x4
+
 function promptUser() {
   const state = store.getState();
   // game finished? play again?
@@ -24,8 +27,8 @@ function promptUser() {
     var property = {
       name: "position",
       message: "Choose a square",
-      validator: /^[1-9]$/,
-      warning: "Must be a number from 1-9"
+      validator: /^[1-9][0-6]?$/,
+      warning: "Must be a number from 1-16"
     };
     prompt.get(property, function(err, result) {
       store.dispatch(Action.choosePosition(result.position));
