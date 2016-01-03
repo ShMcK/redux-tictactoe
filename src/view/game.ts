@@ -13,13 +13,17 @@ export function startGame() {
   // store.dispatch(Action.startGame());
 }
 
+function maxMoves(board) {
+  return board.length > 9 ? 15 : 8;
+}
 
 // TODO: validator for 3x3 or 4x4
 
 function promptUser() {
   const state = store.getState();
   // game finished? play again?
-  if (state.gameOver || state.move > 8) {
+  let maxMove = maxMoves(state.board);
+  if (state.gameOver || state.move > maxMove) {
     playAgain();
   } else {
     // player move
