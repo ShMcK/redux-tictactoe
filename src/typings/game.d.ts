@@ -5,6 +5,11 @@ interface GameState {
   move: number;
 }
 
+interface GameSettings {
+  grid: number;
+  computer: boolean;
+}
+
 interface Action {
   type: string;
   payload?: any;

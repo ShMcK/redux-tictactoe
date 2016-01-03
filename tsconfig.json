@@ -18,7 +18,8 @@
     "src/typings/game.d.ts",
     "src/typings/redux.d.ts",
     "src/view/game.ts",
-    "src/view/render.ts"
+    "src/view/render.ts",
+    "src/view/settings.ts"
   ],
   "atom": {
     "rewriteTsconfig": true

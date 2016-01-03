@@ -1,10 +1,11 @@
 "use strict";
 /** Actions */
-const START_GAME = "START_GAME";
-const CHOOSE_POSITION = "CHOOSE_POSITION";
-const NEXT_PLAYER = "NEXT_PLAYER";
-const WIN_GAME = "WIN_GAME";
-const GAME_OVER = "GAME_OVER";
+export const START_GAME = "START_GAME";
+export const CHOOSE_POSITION = "CHOOSE_POSITION";
+export const NEXT_PLAYER = "NEXT_PLAYER";
+export const WIN_GAME = "WIN_GAME";
+export const GAME_OVER = "GAME_OVER";
+export const GRID_SIZE = "GRID_SIZE";
 
 /** Action Creators */
 export function startGame(): Action {
@@ -21,4 +22,7 @@ export function winGame(): Action {
 }
 export function gameOver(): Action {
   return { type: GAME_OVER };
+}
+export function gridSize(size: number): Action {
+  return { type: GRID_SIZE , payload: { size } };
 }
