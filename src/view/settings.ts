@@ -3,7 +3,7 @@ import { store } from "../model/store";
 import * as Action from "../model/actions";
 const prompt = require("prompt");
 
-export let settings = {
+export let settings: GameSettings = {
   playerOne: "✗",
   playerTwo: "○",
   computerOpponent: false,

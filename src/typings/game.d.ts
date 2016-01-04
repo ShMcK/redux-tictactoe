@@ -3,7 +3,13 @@ interface GameState {
   board: any[];
   gameOver: boolean;
   move: number;
-  computer: boolean;
+}
+
+interface GameSettings {
+  playerOne: string;
+  playerTwo: string;
+  computerOpponent: boolean;
+  difficulty: string;
 }
 
 interface Action {
@@ -11,7 +17,7 @@ interface Action {
   payload?: any;
 }
 
-declare module Prompt {}
+declare module Prompt { }
 declare module "prompt" {
   export = Prompt;
 }

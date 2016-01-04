@@ -8,8 +8,7 @@ let setup = {
   board: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   player: settings.playerOne,
   gameOver: false,
-  move: 0,
-  computer: false
+  move: 0
 };
 
 export function reducer(state: GameState = setup, action: Action): GameState {
