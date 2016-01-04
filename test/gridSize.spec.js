@@ -1,5 +1,5 @@
 var reducer = require("../dist/model/reducer").reducer;
-var Action = require("../dist/model/actions")
+var Action = require("../dist/model/actions");
 var simulate = require("./test-helper");
 var assert = require("assert");
 

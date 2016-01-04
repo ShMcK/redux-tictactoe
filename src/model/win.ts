@@ -21,8 +21,7 @@ export function hasWon(player: string, board: any[]): boolean {
   // not enough moves. can't possibly win
   if (allPlayerMoves.length < 3) { return false; }
 
-  let possibleWins = board.length > 8 ? possible4x4Wins : possible3x3Wins;
-  console.log(possibleWins);
+  let possibleWins = board.length > 9 ? possible4x4Wins : possible3x3Wins;
 
   return possibleWins.some((win: number[]): boolean => {
     return win.every((val: number): boolean => {
