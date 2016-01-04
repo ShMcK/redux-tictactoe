@@ -10,6 +10,7 @@ interface GameSettings {
   playerTwo: string;
   computerOpponent: boolean;
   difficulty: string;
+  grid: number;
 }
 
 interface Action {

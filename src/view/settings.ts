@@ -7,8 +7,23 @@ export let settings: GameSettings = {
   playerOne: "✗",
   playerTwo: "○",
   computerOpponent: false,
-  difficulty: "easy"
+  difficulty: "easy",
+  grid: 3
 };
+
+export function getValidator() {
+  if (settings.grid === 3) {
+    return {
+      regex: /^[1-9]$/,
+      message: "Please use a number between 1 & 9"
+    };
+  } else if (settings.grid === 4) {
+    return {
+      regex: /^[1-9][0-6]?$/,
+      message: "Please use a number between 1 & 16"
+    };
+  }
+}
 
 export function gridSize() {
   return new Promise(function(resolve, reject) {
@@ -22,10 +37,10 @@ export function gridSize() {
     };
     prompt.get(property, function(err, result) {
       if ((/4/).test(result.gridSize)) {
-        // play again? yes
+        settings.grid = 4;
         store.dispatch(Action.gridSize(4));
       } else {
-        // play again? no
+        settings.grid = 3;
         store.dispatch(Action.gridSize(3));
       }
       resolve();

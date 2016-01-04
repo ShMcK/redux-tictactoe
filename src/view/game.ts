@@ -3,7 +3,7 @@ import { store } from "../model/store";
 import * as Action from "../model/actions";
 import { getAnyMove, getBestMove } from "../model/ai";
 const prompt = require("prompt");
-import { settings, gridSize, computerOpponent } from "./settings";
+import { settings, gridSize, computerOpponent, getValidator } from "./settings";
 
 
 export function startGame() {
@@ -17,8 +17,6 @@ function maxMoves(board) {
   return board.length > 9 ? 15 : 8;
 }
 
-// TODO: validator for 3x3 or 4x4
-
 function promptUser() {
   const state = store.getState();
   // game finished? play again?
@@ -28,11 +26,12 @@ function promptUser() {
   } else {
     // player move
     prompt.start();
+    let validator = getValidator();
     var property = {
       name: "position",
       message: "Choose a square",
-      validator: /^[1-9][0-6]?$/,
-      warning: "Must be a number from 1-16"
+      validator: validator.regex,
+      warning: validator.message
     };
     prompt.get(property, function(err, result) {
       store.dispatch(Action.choosePosition(result.position));
