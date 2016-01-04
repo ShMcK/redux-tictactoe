@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "test": "mocha --reporter spec test"
+    "test": "mocha"
   },
   "author": "Shawn McKay <shawn.j.mckay@gmail.com>",
   "license": "ISC",

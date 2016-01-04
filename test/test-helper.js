@@ -4,4 +4,4 @@ module.exports = {
       console.log(input);
     }, 300);
   }
-}
+};
