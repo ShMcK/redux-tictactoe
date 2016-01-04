@@ -15,6 +15,7 @@
     "src/model/reducer.ts",
     "src/model/store.ts",
     "src/model/win.ts",
+    "src/typings/es6-promise.d.ts",
     "src/typings/game.d.ts",
     "src/typings/redux.d.ts",
     "src/view/game.ts",

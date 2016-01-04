@@ -1,5 +1,5 @@
 "use strict";
-import Settings from "./settings";
+import { settings } from "./settings";
 const colors = require("colors/safe");
 
 colors.setTheme({
@@ -15,7 +15,7 @@ function square(board, player, index) {
   if (typeof position === "number") {
     return colors.prompt(position); // open square
   } else {
-    return position == Settings.playerOne ?
+    return position == settings.playerOne ?
       colors.error(position) : colors.warn(position); // ✗, ○
   }
 }

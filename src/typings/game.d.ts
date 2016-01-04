@@ -3,10 +3,6 @@ interface GameState {
   board: any[];
   gameOver: boolean;
   move: number;
-}
-
-interface GameSettings {
-  grid: number;
   computer: boolean;
 }
 

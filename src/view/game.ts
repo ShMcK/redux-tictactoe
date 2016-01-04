@@ -3,14 +3,14 @@ import { store } from "../model/store";
 import * as Action from "../model/actions";
 import { getAnyMove, getBestMove } from "../model/ai";
 const prompt = require("prompt");
-import Settings from "./settings";
+import { settings, gridSize, computerOpponent } from "./settings";
 
 
 export function startGame() {
-  // setup settings
-  gridSize();
-  // reset game data
-  // store.dispatch(Action.startGame());
+  store.dispatch(Action.startGame());
+  gridSize()
+  .then(() => computerOpponent())
+  .then(() => promptUser());
 }
 
 function maxMoves(board) {
@@ -36,8 +36,7 @@ function promptUser() {
     };
     prompt.get(property, function(err, result) {
       store.dispatch(Action.choosePosition(result.position));
-
-      if (Settings.computerOpponent && state.player === Settings.playerTwo) {
+      if (settings.computerOpponent && state.player === settings.playerTwo) {
         // computer player turn is next
         computerOpponentMove();
       } else {
@@ -47,6 +46,7 @@ function promptUser() {
     });
   }
 }
+
 
 function playAgain() {
   prompt.start();
@@ -60,7 +60,7 @@ function playAgain() {
   prompt.get(property, function(err, result) {
     if ((/^y[es]?$/i).test(result.playAgain)) {
       // play again? yes
-      gridSize();
+      startGame();
     } else {
       // play again? no
       store.dispatch(Action.gameOver());
@@ -69,34 +69,15 @@ function playAgain() {
   });
 }
 
-function gridSize() {
-  prompt.start();
-  var property = {
-    name: "gridSize",
-    message: "Grid size? (3 or 4)",
-    validator: /3|4/,
-    warning: "Only 3x3 (3) or 4x4 (4) grid sizes are available",
-    default: "3"
-  };
-  prompt.get(property, function(err, result) {
-    if ((/4/).test(result.gridSize)) {
-      // play again? yes
-      store.dispatch(Action.gridSize(4));
-    } else {
-      // play again? no
-      store.dispatch(Action.gridSize(3));
-    }
-    promptUser();
-  });
-}
 
 
 function computerOpponentMove() {
   let selectedPosition = null;
-  if (Settings.difficulty === "easy") {
+  if (settings.difficulty === "easy") {
     selectedPosition = getAnyMove();
-  } else if (Settings.difficulty === "hard") {
+  } else if (settings.difficulty === "hard") {
     selectedPosition = getBestMove();
   }
   store.dispatch(Action.choosePosition(selectedPosition));
+  promptUser();
 }
